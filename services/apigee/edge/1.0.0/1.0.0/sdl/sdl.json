@@ -1,0 +1,190 @@
+{
+  "name": "apigee-edge",
+  "product_version": "1.0.0",
+  "sdl_version": "1.0.0",
+  "vendor": "gertd",
+  "volumes": [
+    {
+      "name": "redis-backup1",
+      "size_gb": 10,
+      "filesystem": "ext4",
+      "shared": false
+    },
+    {
+      "name": "redis-backup2",
+      "size_gb": 10,
+      "filesystem": "ext4",
+      "shared": false
+    }
+  ],
+  "components": [
+     {
+      "name": "redis",
+      "version": "3.2.3",
+      "vendor": "gertd",
+      "image": "redis:3.2.3-alpine",
+      "min_RAM_mb": 256,
+      "min_disk_gb": 1,
+      "min_VCPU": 1,
+      "platform": "linux-x86_64",
+      "workload_type": "container",
+      "capabilities": ["ALL"],
+      "min_instances": 1,
+      "max_instances": 1,
+      "service_ports": [
+        {
+          "name": "redis",
+          "protocol": "TCP",
+          "source_port": 6379,
+          "target_port": 6379,
+          "public": false
+        }
+      ],
+      "volume_mounts": [
+        {
+          "volume_name": "redis-backup1",
+          "mountpoint": "/tmp/backup1"
+        },
+        {
+          "volume_name": "redis-backup2",
+          "mountpoint": "/tmp/backup2"
+        }
+      ]
+    },
+    {
+      "name": "broker",
+      "version": "1.0.0",
+      "vendor": "gertd",
+      "image": "gertd/apigee-cf-service-broker:latest",
+      "min_RAM_mb": 256,
+      "min_disk_gb": 1,
+      "min_VCPU": 1,
+      "platform": "linux-x86_64",
+      "workload_type": "container",
+      "capabilities": ["ALL"],
+      "min_instances": 1,
+      "max_instances": 1,
+      "service_ports": [
+        {
+          "name": "broker",
+          "protocol": "HTTP",
+          "source_port": 8888,
+          "target_port": 8888,
+          "public": true
+        }
+      ],
+      "parameters": [
+        {
+          "name": "NODE_ENV"
+        },
+        {
+          "name": "APIGEE_REDIS_PASSPHRASE"
+        },
+        {
+          "name": "APIGEE_DASHBOARD_URL"
+        },
+        {
+          "name": "APIGEE_MGMT_API_URL"
+        },
+        {
+          "name": "APIGEE_PROXY_DOMAIN"
+        },
+        {
+          "name": "APIGEE_PROXY_HOST_TEMPLATE"
+        },
+        {
+          "name": "APIGEE_PROXY_NAME_TEMPLATE"
+        },
+        {
+          "name": "SECURITY_USER_NAME"
+        },
+        {
+          "name": "SECURITY_USER_PASSWORD"
+        }
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NODE_ENV",
+      "description": "NODE_ENV",
+      "default": "CNAP",
+      "example": "[CNAP|TEST]",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_REDIS_PASSPHRASE",
+      "description": "APIGEE_REDIS_PASSPHRASE",
+      "default": "0xdeadbeef",
+      "example": "",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_DASHBOARD_URL",
+      "description": "APIGEE_DASHBOARD_URL",
+      "default": "https://enterprise.apigee.com/platform/#/",
+      "example": "https://enterprise.apigee.com/platform/#/",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_MGMT_API_URL",
+      "description": "APIGEE_MGMT_API_URL",
+      "default": "https://api.enterprise.apigee.com/v1",
+      "example": "https://api.enterprise.apigee.com/v1",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_PROXY_DOMAIN",
+      "description": "APIGEE_PROXY_DOMAIN",
+      "default": "apigee.net",
+      "example": "apigee.net",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_PROXY_HOST_TEMPLATE",
+      "description": "APIGEE_PROXY_HOST_TEMPLATE",
+      "default": "${org}-${env}.${domain}",
+      "example": "${org}-${env}.${domain}",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "APIGEE_PROXY_NAME_TEMPLATE",
+      "description": "APIGEE_PROXY_NAME_TEMPLATE",
+      "default": "cf-${routeName}",
+      "example": "cf-${routeName}",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "SECURITY_USER_NAME",
+      "description": "SECURITY_USER_NAME",
+      "default": "sb-user",
+      "example": "",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "SECURITY_USER_PASSWORD",
+      "description": "SECURITY_USER_PASSWORD",
+      "default": "sb-password",
+      "example": "",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    }
+  ]
+}

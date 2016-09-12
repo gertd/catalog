@@ -1,0 +1,15 @@
+{
+  "description": "APIGEE Edge platform for developing and managing API proxies",
+  "categories":[
+    "API Management"
+  ],
+  "labels":[
+    "security",
+    "rate limiting",
+    "quotas",
+    "analytics"
+  ],
+  "type": "by-ref",
+  "supported": true,
+  "deployment_grade": "production" 
+}

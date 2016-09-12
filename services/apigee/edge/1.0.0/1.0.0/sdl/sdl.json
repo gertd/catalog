@@ -2,7 +2,7 @@
   "name": "apigee-edge",
   "product_version": "1.0.0",
   "sdl_version": "1.0.0",
-  "vendor": "gertd",
+  "vendor": "apigee",
   "volumes": [
     {
       "name": "redis-backup1",
@@ -54,7 +54,7 @@
     {
       "name": "broker",
       "version": "1.0.0",
-      "vendor": "gertd",
+      "vendor": "apigee",
       "image": "gertd/apigee-cf-service-broker:latest",
       "min_RAM_mb": 256,
       "min_disk_gb": 1,

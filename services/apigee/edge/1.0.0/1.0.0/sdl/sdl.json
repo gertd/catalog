@@ -21,7 +21,7 @@
      {
       "name": "redis",
       "version": "3.2.3",
-      "vendor": "gertd",
+      "vendor": "redis-lab",
       "image": "redis:3.2.3-alpine",
       "min_RAM_mb": 256,
       "min_disk_gb": 1,

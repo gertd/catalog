@@ -186,5 +186,7 @@
       "required": true,
       "secret": true
     }
-  ]
+  ],
+  "preflight": [],
+  "postflight": []
 }

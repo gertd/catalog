@@ -20,7 +20,7 @@
     }
   ],
   "components": [
-     {
+    {
       "name": "redis",
       "version": "3.2.3",
       "vendor": "redis-lab",
@@ -30,7 +30,9 @@
       "min_VCPU": 1,
       "platform": "linux-x86_64",
       "workload_type": "container",
-      "capabilities": ["ALL"],
+      "capabilities": [
+        "ALL"
+      ],
       "min_instances": 1,
       "max_instances": 1,
       "service_ports": [
@@ -63,7 +65,9 @@
       "min_VCPU": 1,
       "platform": "linux-x86_64",
       "workload_type": "container",
-      "capabilities": ["ALL"],
+      "capabilities": [
+        "ALL"
+      ],
       "min_instances": 1,
       "max_instances": 1,
       "service_ports": [
@@ -171,9 +175,18 @@
       "secret": false
     },
     {
+      "name": "SB_NAME",
+      "description": "Service Broker Name",
+      "default": null,
+      "example": "apigee-edge",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
       "name": "SECURITY_USER_NAME",
-      "description": "SECURITY_USER_NAME",
-      "default": "sb-user",
+      "description": "Service Broker User Name",
+      "default": null,
       "example": "sb-user",
       "data_type": "string",
       "required": true,
@@ -181,14 +194,87 @@
     },
     {
       "name": "SECURITY_USER_PASSWORD",
-      "description": "SECURITY_USER_PASSWORD",
+      "description": "Service Broker Password",
       "default": null,
       "example": "sb-password",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "CF_API",
+      "description": "Cloud Foundry API endpoint",
+      "default": null,
+      "example": "https://api.hcf.helion.io",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "CF_UID",
+      "description": "Cloud Foundry User Name",
+      "default": null,
+      "example": "admin",
+      "data_type": "string",
+      "required": true,
+      "secret": false
+    },
+    {
+      "name": "CF_PWD",
+      "description": "Cloud Foundry Password",
+      "default": null,
+      "example": "<very secret>",
       "data_type": "string",
       "required": true,
       "secret": false
     }
   ],
   "preflight": [],
-  "postflight": []
+  "postflight": [
+    {
+      "name": "edge-setup",
+      "version": "0.0.0",
+      "vendor": "apigee",
+      "image": "gertd/apigee-edge-job:latest",
+      "min_RAM_mb": 1024,
+      "min_disk_gb": 1,
+      "min_VCPU": 1,
+      "platform": "linux-x86_64",
+      "capabilities": [],
+      "depends_on": [],
+      "affinity": [],
+      "labels": [
+        "post-deployment-setup"
+      ],
+      "min_instances": 1,
+      "max_instances": 1,
+      "service_ports": [],
+      "volume_mounts": [],
+      "parameters": [
+        {
+          "name": "SB_NAME"
+        },
+        {
+          "name": "SECURITY_USER_NAME"
+        },
+        {
+          "name": "SECURITY_USER_PASSWORD"
+        },
+        {
+          "name": "CF_API"
+        },
+        {
+          "name": "CF_UID"
+        },
+        {
+          "name": "CF_PWD"
+        }
+      ],
+      "workload_type": "container",
+      "retry_count": 5,
+      "entrypoint": [
+        "/app/run.sh"
+      ]
+    }
+  ]
 }

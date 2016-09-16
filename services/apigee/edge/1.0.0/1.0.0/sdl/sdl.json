@@ -271,6 +271,7 @@
         }
       ],
       "workload_type": "container",
+      "retrycount": 1,
       "entrypoint": [
         "/bin/sh",
         "/app/run.sh"

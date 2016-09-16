@@ -273,6 +273,7 @@
       "workload_type": "container",
       "retry_count": 5,
       "entrypoint": [
+        "/bin/sh",
         "/app/run.sh"
       ]
     }

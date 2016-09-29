@@ -230,52 +230,5 @@
     }
   ],
   "preflight": [],
-  "postflight": [
-    {
-      "name": "edge-setup",
-      "version": "0.0.0",
-      "vendor": "apigee",
-      "image": "gertd/apigee-edge-job:latest",
-      "min_RAM_mb": 1024,
-      "min_disk_gb": 1,
-      "min_VCPU": 1,
-      "platform": "linux-x86_64",
-      "capabilities": [],
-      "depends_on": [],
-      "affinity": [],
-      "labels": [
-        "post-deployment-setup"
-      ],
-      "min_instances": 1,
-      "max_instances": 1,
-      "service_ports": [],
-      "volume_mounts": [],
-      "parameters": [
-        {
-          "name": "SB_NAME"
-        },
-        {
-          "name": "SECURITY_USER_NAME"
-        },
-        {
-          "name": "SECURITY_USER_PASSWORD"
-        },
-        {
-          "name": "CF_API"
-        },
-        {
-          "name": "CF_UID"
-        },
-        {
-          "name": "CF_PWD"
-        }
-      ],
-      "workload_type": "container",
-      "retrycount": 1,
-      "entrypoint": [
-        "/bin/sh",
-        "/app/run.sh"
-      ]
-    }
-  ]
+  "postflight": []
 }

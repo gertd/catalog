@@ -24,7 +24,7 @@
       "name": "redis",
       "version": "3.2.4",
       "vendor": "redis-lab",
-      "image": "redis:3.2.4-alpine",
+      "image": "gertd/redis:3.2.4-alpine",
       "min_RAM_mb": 256,
       "min_disk_gb": 1,
       "min_VCPU": 1,

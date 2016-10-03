@@ -1,0 +1,13 @@
+{
+  "description": "Azuqua, connect applications, data, and processes",
+  "categories":[
+    "workflow"
+  ],
+  "labels":[
+    "workflow",
+    "serverless functions"
+  ],
+  "type": "by-ref",
+  "supported": true,
+  "deployment_grade": "production" 
+}

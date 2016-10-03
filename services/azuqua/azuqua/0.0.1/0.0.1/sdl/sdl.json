@@ -40,7 +40,6 @@
     {
       "name": "AZUQUA_ACCESS_KEY",
       "description": "AZUQUA_ACCESS_KEY",
-      "default": "",
       "example": "",
       "data_type": "string",
       "required": true,
@@ -49,7 +48,6 @@
     {
       "name": "AZUQUA_ACCESS_TOKEN",
       "description": "AZUQUA_ACCESS_TOKEN",
-      "default": "",
       "example": "",
       "data_type": "string",
       "required": true,
